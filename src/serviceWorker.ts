@@ -5,5 +5,5 @@ import { config } from './config';
 
 export const ratingServiceWorker = function refreshSuppliersRating(db: loki) {
   updateSuppliersRating(db);
-  setTimeout(refreshSuppliersRating, config.ratingInterval);
+  setTimeout(() => refreshSuppliersRating(db), config.ratingInterval);
 };
