@@ -1,8 +1,8 @@
 import loki from 'lokijs';
 import express from 'express';
+import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 
-import { getSortedSuppliers } from './services/supplierServices';
 import { config } from './config';
 import { ratingServiceWorker as startRatingServiceWorker } from './serviceWorker';
 import { typeDefs } from './schemas/supplierSchema';
@@ -34,6 +34,7 @@ const db = new loki(config.dbPath, {
 const startApollo = () => {
   const server = new ApolloServer({ typeDefs, resolvers: resolvers(db) });
   const app = express();
+  app.use(cors());
   server.applyMiddleware({ app });
   app.listen({ port: 4000 }, () =>
     console.log(

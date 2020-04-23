@@ -6,6 +6,10 @@ import { config } from '../config';
 const suppliersCollectionName = 'suppliers';
 const { priorityWeighMatrix, messageRatioWeigh } = config;
 
+export const getSupplierById = (db: loki, id: string) => {
+  return db.getCollection(suppliersCollectionName).findOne({ id });
+};
+
 export const getSortedSuppliers = (
   db: loki,
   offset: number = null,
@@ -81,8 +85,8 @@ export const calculateMessageWeighedRating = (supplier: Supplier): number => {
     : (numOfSentMessages / numOfReceivedMessages) * messageRatioWeigh;
 };
 
+export const getNumberOfSuppliers = (db: loki): number =>
+  db.getCollection(suppliersCollectionName).count();
+
 const getSupplierByLokiId = (db: loki, id: number): Supplier =>
   db.getCollection(suppliersCollectionName).get(id);
-
-const getNumberOfSuppliers = (db: loki): number =>
-  db.getCollection(suppliersCollectionName).count();

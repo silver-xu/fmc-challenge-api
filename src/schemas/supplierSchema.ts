@@ -2,7 +2,13 @@ import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
   type Query {
-    pagedSuppliers(offset: Int, pageSize: Int): [Supplier]!
+    pagedSuppliers(offset: Int, pageSize: Int): Suppliers
+    supplier(id: String!): Supplier
+  }
+
+  type Suppliers {
+    suppliers: [Supplier]!
+    total: Int
   }
 
   type Supplier {

@@ -127,10 +127,11 @@ const getRandomInt = (lower: number, upper: number) =>
 const getRandomService = (): Service => allServices[getRandomInt(0, 9)];
 const getRandomServices = (): Service[] => {
   const services: Service[] = [];
-  for (let i = 0; i < getRandomInt(0, allServices.length); i++) {
+  for (let i = 0; i < getRandomInt(1, allServices.length); i++) {
     services.push(getRandomService());
   }
-  return services;
+
+  return [...new Set(services)];
 };
 
 const getRandomWorkOrder = (): WorkOrder => ({
